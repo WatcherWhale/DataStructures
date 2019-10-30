@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Main
 {
-    public static final String folderPath = "TestFiles";
+    private static final String folderPath = "TestFiles";
 
     public static void main(String[] args)
     {
@@ -35,21 +35,21 @@ public class Main
 
     }
 
-    public static ArrayList<String> GetFilePaths(String folderPath) throws FileNotFoundException
+    private static ArrayList<String> GetFilePaths(String folderPath) throws FileNotFoundException
     {
-        ArrayList<String> outp = new ArrayList<>();
+        ArrayList<String> output = new ArrayList<>();
 
         File dir = new File(folderPath);
         for(File file : dir.listFiles())
         {
             if(file.isFile())
-                outp.add(file.getPath());
+                output.add(file.getPath());
         }
 
-        return outp;
+        return output;
     }
 
-    public static String ReadFile(String path) throws FileNotFoundException
+    private static String ReadFile(String path) throws FileNotFoundException
     {
         // Open file
         BufferedReader reader = new BufferedReader(new FileReader(path));
