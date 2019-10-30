@@ -13,9 +13,7 @@ public class Main
 
 	    try
         {
-            // Open file
             BufferedReader reader = new BufferedReader(new FileReader("file.in"));
-            // Read all lines in an array and collect them all in one string.
             String str = reader.lines().collect(Collectors.joining(System.lineSeparator()));
 
             if(parser.Parse(str))
@@ -29,4 +27,4 @@ public class Main
         }
 
     }
-}
+} : PASS

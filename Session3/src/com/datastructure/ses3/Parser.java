@@ -13,6 +13,8 @@ public class Parser
 
     public boolean Parse(String str)
     {
+        this._stack.clear();
+
         // Foreach Character c in String str
         for (char c : str.toCharArray())
         {
