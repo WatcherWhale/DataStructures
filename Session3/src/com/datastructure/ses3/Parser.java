@@ -19,13 +19,13 @@ public class Parser
         for (char c : str.toCharArray())
         {
             // Check is we need to push the character to the stacks
-            if(PushToStack(c))
+            if(c == '(' || c == '[' || c == '{')
             {
                 // Push to stack
                 this._stack.push(c);
             }
             // Check if we need to remove/pop from the stack
-            else if(RemoveFromStack(c))
+            else if(c == ')' || c == ']' || c == '}')
             {
                 // Find the char in the other direction
                 char reverseChar = this.GetReverseChar(c);
@@ -39,22 +39,7 @@ public class Parser
         }
 
         // If the stack isn't empty after parsing the parsing has failed
-        if(!this._stack.empty())
-            return false;
-
-        return true;
-    }
-
-    // Check if a char should be removed from the stack
-    public boolean RemoveFromStack(char c)
-    {
-        return c == ')' || c == ']' || c == '}';
-    }
-
-    // Check if a char should be added to the stack
-    private boolean PushToStack(char c)
-    {
-        return c == '(' || c == '[' || c == '{';
+        return this._stack.empty();
     }
 
     // Find the char in the other direction
