@@ -44,4 +44,18 @@ public class RandomGenerator
 
         return list;
     }
+
+    public static BLList<Integer> GenerateRandomBetterLinkedList(int n, int a, int b)
+    {
+        BLList<Integer> list = new BLList<Integer>();
+
+        Random rand = new Random();
+
+        for(int i = 0; i < n; i++)
+        {
+            list.append( Math.abs(rand.nextInt() % (b - a)) + a);
+        }
+
+        return list;
+    }
 }
