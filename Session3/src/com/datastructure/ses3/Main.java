@@ -24,12 +24,14 @@ public class Main
             for(String path : GetFilePaths(useFolderPath))
             {
                 String str = ReadFile(path);
+                String[] arr = str.split(":");
+                String output = arr[arr.length - 1];
 
                 // Check if the file is correctly formatted!
-                if(parser.Parse(str))
-                    System.out.println(path + ":Passed!");
+                if(parser.Parse(str) && output.equals("PASS") || !parser.Parse(str) && output.equals("FAIL"))
+                    System.out.println(path + ":Test successful!");
                 else
-                    System.out.println(path + ":Failed!");
+                    System.out.println(path + ":Test failed!");
             }
         }
         catch (Exception e)
