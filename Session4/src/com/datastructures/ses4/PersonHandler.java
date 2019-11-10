@@ -8,8 +8,8 @@ import java.util.Iterator;
 
 public class PersonHandler
 {
-    String _path;
-    ArrayList<Person> _list;
+    private String _path;
+    private ArrayList<Person> _list;
 
     public PersonHandler(String filepath) throws IOException
     {
@@ -17,16 +17,24 @@ public class PersonHandler
         ReadFile(this._path);
     }
 
+    public void PrintList()
+    {
+        Iterator<Person> it = this._list.iterator();
+
+        for (int i = 0; it.hasNext(); i++)
+        {
+            Person p = it.next();
+            System.out.println(i + " " + p.toString());
+        }
+    }
+
     public void SearchName(String name)
     {
-        Iterator it = this._list.iterator();
-        while (it.hasNext())
-        {
+        Iterator<Person> it = this._list.iterator();
 
-        }
-
-        for(Person person : this._list)
+        while(it.hasNext())
         {
+            Person person = it.next();
             if(person.getName().equals(name))
                 System.out.println(person.toString());
         }
@@ -34,12 +42,19 @@ public class PersonHandler
 
     public void SearchLastName(char firstChar)
     {
-        for(int i = this._list.size() - 1; i >= 0; i--)
-        {
-            Person person = this._list.get(i);
+        Iterator<Person> it = this._list.iterator();
+        ArrayList<Person> list = new ArrayList<>();
 
+        while(it.hasNext())
+        {
+            Person person = it.next();
             if(person.getLastName().charAt(0) == firstChar)
-                System.out.println(person.toString());
+                list.add(person);
+        }
+
+        for(int i = list.size() - 1; i >= 0; i--)
+        {
+            System.out.println(list.get(i).toString());
         }
     }
 
@@ -47,9 +62,11 @@ public class PersonHandler
     {
         ArrayList<Integer> indices = new ArrayList<>();
 
-        for(int i = 0; i <  this._list.size(); i++)
+        Iterator<Person> it = this._list.iterator();
+
+        for (int i = 0; it.hasNext(); i++)
         {
-            Person person = this._list.get(i);
+            Person person = it.next();
 
             if(person.getAddress().equals(address))
                 indices.add(i);
@@ -57,15 +74,9 @@ public class PersonHandler
 
         for(int i : indices)
         {
-            System.out.println(this._list.get(i).toString());
+            System.out.println(i + " " + this._list.get(i).toString());
         }
 
-    }
-
-    public void PrintList()
-    {
-        for(Person p : this._list)
-            System.out.println(p.toString());
     }
 
     private void ReadFile(String path) throws IOException

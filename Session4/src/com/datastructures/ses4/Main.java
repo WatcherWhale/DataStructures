@@ -11,19 +11,19 @@ public class Main
         {
             PersonHandler personHandler = new PersonHandler("ListData.txt");
 
-            System.out.println("Alle personen");
+            System.out.println("Alle personen :");
             personHandler.PrintList();
             System.out.println("");
 
-            System.out.println("De personen met de voornaam: Albert");
+            System.out.println("De personen met de voornaam Albert zijn:");
             personHandler.SearchName("Albert");
             System.out.println("");
 
-            System.out.println("Personen met familienaam: M*");
+            System.out.println("Personen met familienaam M*");
             personHandler.SearchLastName('M');
             System.out.println("");
 
-            System.out.println("Personen die in Antwerpen wonen.");
+            System.out.println("Personen die in Antwerpen wonen :");
             personHandler.SearchAddress("Antwerpen");
             System.out.println("");
 
