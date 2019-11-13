@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 public class PersonHandler
 {
@@ -19,7 +20,7 @@ public class PersonHandler
 
     public void PrintList()
     {
-        Iterator<Person> it = this._list.iterator();
+        ListIterator<Person> it = this._list.listIterator();
 
         for (int i = 0; it.hasNext(); i++)
         {
@@ -30,7 +31,7 @@ public class PersonHandler
 
     public void SearchName(String name)
     {
-        Iterator<Person> it = this._list.iterator();
+        ListIterator<Person> it = this._list.listIterator();
 
         while(it.hasNext())
         {
@@ -42,19 +43,13 @@ public class PersonHandler
 
     public void SearchLastName(char firstChar)
     {
-        Iterator<Person> it = this._list.iterator();
-        ArrayList<Person> list = new ArrayList<>();
+        ListIterator<Person> it = this._list.listIterator(this._list.size());
 
-        while(it.hasNext())
+        while(it.hasPrevious())
         {
-            Person person = it.next();
+            Person person = it.previous();
             if(person.getLastName().charAt(0) == firstChar)
-                list.add(person);
-        }
-
-        for(int i = list.size() - 1; i >= 0; i--)
-        {
-            System.out.println(list.get(i).toString());
+                System.out.println(person.toString());
         }
     }
 
@@ -62,7 +57,7 @@ public class PersonHandler
     {
         ArrayList<Integer> indices = new ArrayList<>();
 
-        Iterator<Person> it = this._list.iterator();
+        ListIterator<Person> it = this._list.listIterator();
 
         for (int i = 0; it.hasNext(); i++)
         {
@@ -72,11 +67,11 @@ public class PersonHandler
                 indices.add(i);
         }
 
-        for(int i : indices)
+        ListIterator<Integer> iterator = indices.listIterator();
+        while (iterator.hasNext())
         {
-            System.out.println(i + " " + this._list.get(i).toString());
+            System.out.println(i + " " + this._list.get(iterator.next()).toString());
         }
-
     }
 
     private void ReadFile(String path) throws IOException
