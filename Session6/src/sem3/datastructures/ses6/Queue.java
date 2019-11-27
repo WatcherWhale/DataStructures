@@ -100,5 +100,8 @@ public class Queue<E> implements IQueue<E>
         {
             this._arr[0] = null;
         }
+
+        this._size = 0;
+        this._actualSize = 0;
     }
 }

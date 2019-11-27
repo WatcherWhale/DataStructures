@@ -25,8 +25,9 @@ public class QueueTest
         q.enqueue(2);
 
         assertEquals((int)q.dequeue(), 1);
-        assertEquals((int)q.dequeue(), 1);
+        assertEquals((int)q.dequeue(), 2);
         assertNull(q.dequeue());
+
         q.Clear();
 
         q.enqueue(new Integer[] {1,2,3,4,5,6,7});
@@ -40,9 +41,11 @@ public class QueueTest
         for(int i = 1; i <= 7; i++)
             list.add(i);
 
+        q.enqueue(list);
+
         assertEquals((int)q.dequeue(), 6);
         assertEquals((int)q.dequeue(), 7);
-        assertEquals((int)q.dequeue(), 3);
+        assertNull(q.dequeue());
     }
 
     @Test
@@ -55,7 +58,7 @@ public class QueueTest
         assertEquals(q.actualLength(), 4);
 
         q.enqueue(new Integer[] {5,6,7,8});
-        assertEquals(q.length(), 4);
+        assertEquals(q.length(), 3);
         assertEquals(q.actualLength(), 8);
 
         q.Clear();
