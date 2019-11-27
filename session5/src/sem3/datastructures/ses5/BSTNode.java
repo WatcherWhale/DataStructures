@@ -113,11 +113,16 @@ class BSTNode<Key, E> implements BinNode<E>
         int leftHeight = 0;
         int rightHeight = 0;
 
+        // Calculate left height
         if(this.left != null)
             leftHeight = this.left.height();
+
+        // Calculate right height
         if(this.right != null)
             rightHeight = this.right.height();
 
+        // Check which length is the biggest and return it
+        // Add one to add the current node
         if(leftHeight > rightHeight)
             return leftHeight + 1;
         else
@@ -157,45 +162,25 @@ class BSTNode<Key, E> implements BinNode<E>
         if(isRoot) System.out.print(" >\n");
     }
 
-    public void levelOrderSlow()
-    {
-        ArrayList<BSTNode<Key, E>> top = new ArrayList<>();
-        ArrayList<BSTNode<Key, E>> bottom = new ArrayList<>();
-
-        bottom.add(this);
-
-        do
-        {
-            top = bottom;
-            bottom = new ArrayList<>();
-
-            for(int i = 0; i < top.size(); i++)
-            {
-                if(top.get(i) == null) continue;
-
-                System.out.print(top.get(i).element().toString() + " ");
-
-                bottom.add(top.get(i).left());
-                bottom.add(top.get(i).right());
-            }
-
-            System.out.print("\n");
-        }
-        while(bottom.size() != 0);
-    }
-
     public void levelOrder()
     {
+        // Create queue/linkedlist (has interface Queue)
         LinkedList<BSTNode<Key, E>> q = new LinkedList<>();
+        // Add the current element
         q.add(this);
 
+        // While the queue is not empty add an element
         while (!q.isEmpty())
         {
+            // Get the element on top and remove it
             BSTNode<Key, E> node = q.poll();
+            // If the node is null continue to the next element in the queue
             if(node == null) continue;
 
+            // If the element exists print its value
             System.out.print(node.element().toString() + " ");
 
+            // Add the left and right node (can be null)
             q.add(node.left);
             q.add(node.right);
         }
@@ -208,10 +193,14 @@ class BSTNode<Key, E> implements BinNode<E>
 
     public void insert(Key key, E value)
     {
+        // Type check
         if(key instanceof Integer)
         {
+            // Check if the key of the new element is bigger or smaller than the key of this node
             if((int)key < (int)this.key)
             {
+                // If the left node is not empty call the insert method from the left node
+                // Else create a new left node
                 if(this.left != null)
                     this.left.insert(key,value);
                 else
@@ -219,6 +208,8 @@ class BSTNode<Key, E> implements BinNode<E>
             }
             else
             {
+                // If the right node is not empty call the insert method from the right node
+                // Else create a new right node
                 if(this.right != null)
                     this.right.insert(key,value);
                 else
