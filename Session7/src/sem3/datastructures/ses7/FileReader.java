@@ -7,25 +7,29 @@ import java.util.ArrayList;
 
 public class FileReader
 {
-    private ArrayList<Entry> _list;
+    private Period[] _periods;
 
-    public FileReader()
+    public FileReader(int periods)
     {
-        this._list = new ArrayList<>();
+        this._periods = new Period[periods];
+
+        for (int i = 0; i < periods; i++)
+        {
+            this._periods[i] = new Period();
+        }
     }
 
-    public ArrayList<Entry> GetList()
+    public Period[] GetPeriods()
     {
-        return this._list;
+        return this._periods;
     }
 
     public void ReadFile(String path) throws IOException
     {
-        this._list = new ArrayList<>();
-
         for(String line : Files.readAllLines(Path.of(path)))
         {
-            this._list.add(new Entry(line));
+            Entry e = new Entry(line);
+            this._periods[e.getPeriodIndex()].Insert(e.getCourse());
         }
     }
 }

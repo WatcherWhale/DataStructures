@@ -22,4 +22,9 @@ public class Entry
     {
         return this._period;
     }
+
+    public Integer getPeriodIndex()
+    {
+        return this._period - 1;
+    }
 }
